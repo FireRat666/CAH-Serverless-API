@@ -1,6 +1,6 @@
 # Cards Against Humanity API
 
-A serverless, database-free REST API that serves card data for the popular party game **Cards Against Humanity**. This API is optimized for serverless platforms like Vercel and Netlify. It fetches the card data once, caches it in memory, and provides high-performance access to packs and cards.
+A serverless, database-free REST API that serves card data for the popular party game **Cards Against Humanity**. [This API](https://cah-api.firer.at/) is optimized for serverless platforms like Vercel and Netlify. It fetches the card data once, caches it in memory, and provides high-performance access to packs and cards.
 
 ## Features
 
