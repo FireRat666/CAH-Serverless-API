@@ -51,7 +51,7 @@
           <a href="https://github.com/FireRat666/CAH-Serverless-API" class="btn btn-primary" target="_blank" rel="noopener">
             <i class="fab fa-github"></i> View on GitHub
           </a>
-          <a href="https://github.com/FireRat666/json-against-humanity/" class="btn btn-secondary" target="_blank" rel="noopener">
+          <a href="https://jah.firer.at/" class="btn btn-secondary" target="_blank" rel="noopener">
             <i class="fas fa-database"></i> JSON Against Humanity
           </a>
         </div>
@@ -67,6 +67,8 @@
           <button class="preset-pill" data-path="/api/sets/0">/api/sets/0</button>
           <button class="preset-pill" data-path="/api/sets/0?n=3">/api/sets/0?n=3</button>
           <button class="preset-pill" data-path="/api/multi?sets=0,1">/api/multi?sets=0,1</button>
+          <button class="preset-pill" data-path="/api/sheets">/api/sheets</button>
+          <button class="preset-pill" data-path="/api/sheets/cah-packs">/api/sheets/cah-packs</button>
         </div>
 
         <div class="api-input-group">
@@ -119,6 +121,16 @@
               <td><span class="endpoint-badge">GET</span></td>
               <td><span class="endpoint-path">/api/multi?sets=0,1</span></td>
               <td class="endpoint-desc">Combine cards from multiple packs (comma-separated list of IDs) into a single object.</td>
+            </tr>
+            <tr>
+              <td><span class="endpoint-badge">GET</span></td>
+              <td><span class="endpoint-path">/api/sheets</span></td>
+              <td class="endpoint-desc">List all unique sheet sources (e.g. <code>CAH Packs</code>, <code>Fan Expansions</code>).</td>
+            </tr>
+            <tr>
+              <td><span class="endpoint-badge">GET</span></td>
+              <td><span class="endpoint-path">/api/sheets/:id</span></td>
+              <td class="endpoint-desc">Retrieve all sets associated with the given slugified sheet ID (e.g. <code>cah-packs</code>).</td>
             </tr>
           </tbody>
         </table>
