@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="color-scheme" content="dark">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cards Against Humanity Serverless API</title>
+    <meta name="description" content="A blazing fast, free serverless API for Cards Against Humanity cards. Fetch sets, random cards, and multiple decks in JSON format.">
+    <link rel="canonical" href="https://cah-api.firer.at/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Cards Against Humanity Serverless API">
+    <meta property="og:description" content="A blazing fast, free serverless API for Cards Against Humanity cards. Fetch sets, random cards, and multiple decks in JSON format.">
+    <meta property="og:url" content="https://cah-api.firer.at/">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://cah-api.firer.at/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Cards Against Humanity Serverless API">
+    <meta name="twitter:description" content="A blazing fast, free serverless API for Cards Against Humanity cards. Fetch sets, random cards, and multiple decks in JSON format.">
+    <meta name="twitter:image" content="https://cah-api.firer.at/og-image.png">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "CAH Serverless API",
+      "url": "https://cah-api.firer.at/",
+      "description": "A fast, free serverless API for Cards Against Humanity cards. Fetch sets, random cards, and multiple decks in JSON format.",
+      "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/"
+    }
+    </script>
+
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="preconnect" href="https://rsms.me/">
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext x='50%25' y='60%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui,sans-serif' font-weight='800' font-size='15' fill='%232bff00'%3EAPI%3C/text%3E%3C/svg%3E">
+  </head>
+  <body>
+    <div class="container">
+      <header class="hero">
+        <h1>CAH Serverless API</h1>
+        <p>A blazing fast, zero-maintenance serverless API for Cards Against Humanity cards. Serves card metadata, full packs, random counts, and combined decks over global CDNs.</p>
+        
+        <div class="btn-group">
+          <a href="https://github.com/FireRat666/CAH-Serverless-API" class="btn btn-primary" target="_blank" rel="noopener">
+            <i class="fab fa-github"></i> View on GitHub
+          </a>
+          <a href="https://github.com/FireRat666/json-against-humanity/" class="btn btn-secondary" target="_blank" rel="noopener">
+            <i class="fas fa-database"></i> JSON Against Humanity
+          </a>
+        </div>
+      </header>
+
+      <!-- API Explorer -->
+      <section class="glass-panel api-explorer">
+        <h3>API Explorer</h3>
+        <p>Test the serverless endpoints in real-time. Select a preset or customize the path below.</p>
+        
+        <div class="preset-pills">
+          <button class="preset-pill active" data-path="/api/sets">/api/sets</button>
+          <button class="preset-pill" data-path="/api/sets/0">/api/sets/0</button>
+          <button class="preset-pill" data-path="/api/sets/0?n=3">/api/sets/0?n=3</button>
+          <button class="preset-pill" data-path="/api/multi?sets=0,1">/api/multi?sets=0,1</button>
+        </div>
+
+        <div class="api-input-group">
+          <span class="api-input-prefix" id="api-origin">https://api-url.com</span>
+          <input type="text" id="api-path" class="api-input" value="/api/sets">
+          <button class="api-btn" id="api-send">Send Request</button>
+        </div>
+
+        <div class="response-container">
+          <div class="response-header">
+            <span class="status-badge" id="response-status">STATUS: -</span>
+            <button class="copy-btn" id="response-copy">
+              <i class="far fa-copy"></i> Copy JSON
+            </button>
+          </div>
+          <pre><code class="response-body" id="response-output">Click "Send Request" to fetch data...</code></pre>
+        </div>
+      </section>
+
+      <!-- Documentation Table -->
+      <section class="glass-panel">
+        <h3>Available Endpoints</h3>
+        <p>All endpoints respond in JSON format, support CORS, and are automatically cached for fast response times.</p>
+        
+        <table class="endpoint-table">
+          <thead>
+            <tr>
+              <th>Method</th>
+              <th>Endpoint</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="endpoint-badge">GET</span></td>
+              <td><span class="endpoint-path">/api/sets</span></td>
+              <td class="endpoint-desc">List all available card packs including metadata (name, official status, sheet source).</td>
+            </tr>
+            <tr>
+              <td><span class="endpoint-badge">GET</span></td>
+              <td><span class="endpoint-path">/api/sets/:id</span></td>
+              <td class="endpoint-desc">Retrieve a complete pack including all white (answers) and black (prompts) cards.</td>
+            </tr>
+            <tr>
+              <td><span class="endpoint-badge">GET</span></td>
+              <td><span class="endpoint-path">/api/sets/:id?n=5</span></td>
+              <td class="endpoint-desc">Retrieve <code>n</code> random white cards from a specific pack.</td>
+            </tr>
+            <tr>
+              <td><span class="endpoint-badge">GET</span></td>
+              <td><span class="endpoint-path">/api/multi?sets=0,1</span></td>
+              <td class="endpoint-desc">Combine cards from multiple packs (comma-separated list of IDs) into a single object.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- FAQ & Details -->
+      <section class="glass-panel">
+        <h3>Frequently Asked Questions</h3>
+        <br>
+        <dl>
+          <dt>Where does the card data come from?</dt>
+          <dd>All card sets are fetched dynamically from the curated <a href="https://github.com/FireRat666/json-against-humanity/" target="_blank" rel="noopener">JSON Against Humanity</a> project. Caching is handled on the serverless layer to keep responses fast and reliable.</dd>
+          
+          <dt>How does caching work?</dt>
+          <dd>To minimize external API request overhead and stay within serverless runtime limits, card datasets are loaded into memory and cached. First requests load the data, and subsequent calls fetch immediately from memory.</dd>
+
+          <dt>Is it free to use?</dt>
+          <dd>Yes! The API is designed to run efficiently on free-tier hosting networks like Vercel and Netlify which provide generous bandwidth and serverless allowances.</dd>
+          
+          <dt>Can I use this in my own client app?</dt>
+          <dd>Absolutely! CORS is fully enabled on all endpoints, allowing you to fetch deck data using simple <code>fetch()</code> calls from anywhere.</dd>
+        </dl>
+      </section>
+
+      <footer>
+        <p>&copy; 2026 FireRat. Cards Against Humanity&reg; is distributed under a <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">Creative Commons BY-NC-SA 4.0 license</a>.</p>
+      </footer>
+    </div>
+
+    <!-- API Explorer Handler Script -->
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const originSpan = document.getElementById('api-origin');
+        const pathInput = document.getElementById('api-path');
+        const sendBtn = document.getElementById('api-send');
+        const statusBadge = document.getElementById('response-status');
+        const outputCode = document.getElementById('response-output');
+        const copyBtn = document.getElementById('response-copy');
+        const presetPills = document.querySelectorAll('.preset-pill');
+
+        // Set local/current origin
+        const currentOrigin = window.location.origin;
+        originSpan.textContent = currentOrigin;
+
+        // Fetch helper
+        const performRequest = async (path) => {
+          statusBadge.textContent = 'STATUS: FETCHING...';
+          statusBadge.className = 'status-badge';
+          outputCode.textContent = '// Loading data from serverless function...';
+
+          try {
+            const response = await fetch(`${currentOrigin}${path}`);
+            const data = await response.json();
+            
+            statusBadge.textContent = `STATUS: ${response.status} ${response.statusText}`;
+            statusBadge.classList.add(response.ok ? 'success' : 'error');
+            
+            outputCode.textContent = JSON.stringify(data, null, 2);
+          } catch (error) {
+            statusBadge.textContent = 'STATUS: FAILED';
+            statusBadge.classList.add('error');
+            outputCode.textContent = `// Error fetching endpoint:\n${error.message}`;
+          }
+        };
+
+        // Send Button Click
+        sendBtn.addEventListener('click', () => {
+          const path = pathInput.value.trim();
+          if (path.startsWith('/')) {
+            performRequest(path);
+          } else {
+            performRequest('/' + path);
+          }
+        });
+
+        // Preset Pills Click
+        presetPills.forEach(pill => {
+          pill.addEventListener('click', () => {
+            presetPills.forEach(p => p.classList.remove('active'));
+            pill.classList.add('active');
+            
+            const path = pill.dataset.path;
+            pathInput.value = path;
+            performRequest(path);
+          });
+        });
+
+        // Copy JSON Button Click
+        copyBtn.addEventListener('click', () => {
+          const codeText = outputCode.textContent;
+          if (codeText && !codeText.startsWith('Click') && !codeText.startsWith('// Loading')) {
+            navigator.clipboard.writeText(codeText).then(() => {
+              const originalHTML = copyBtn.innerHTML;
+              copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+              copyBtn.style.color = '#2bff00';
+              setTimeout(() => {
+                copyBtn.innerHTML = originalHTML;
+                copyBtn.style.color = '';
+              }, 2000);
+            });
+          }
+        });
+
+        // Perform initial fetch on page load
+        performRequest('/api/sets');
+      });
+    </script>
+  </body>
+</html>

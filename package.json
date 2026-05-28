@@ -1,0 +1,24 @@
+{
+    "name": "cah-serverless-api",
+    "version": "1.0.0",
+    "type": "module",
+    "description": "CAH API with serverless functions (Vercel & Netlify)",
+    "dependencies": {},
+    "devDependencies": {},
+    "scripts": {
+        "dev:vercel": "vercel dev",
+        "dev:netlify": "netlify dev",
+        "deploy:vercel": "vercel --prod",
+        "deploy:netlify": "netlify deploy --prod"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/FireRat666/CAH-Serverless-API.git"
+    },
+    "author": "FireRat",
+    "license": "LGPL-3.0-or-later",
+    "bugs": {
+        "url": "https://github.com/FireRat666/CAH-Serverless-API/issues"
+    },
+    "homepage": "https://github.com/FireRat666/CAH-Serverless-API"
+}
